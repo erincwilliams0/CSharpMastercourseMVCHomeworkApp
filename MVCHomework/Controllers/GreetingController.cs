@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MVCHomework.Models;
+using System.Security.Principal;
 
 namespace MVCHomework.Controllers
 {
@@ -26,11 +28,13 @@ namespace MVCHomework.Controllers
         // POST: GreetingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(GreetingModel model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = $"Hi {model.FirstName} {model.LastName}";
+
+                return View();
             }
             catch
             {
